@@ -1,0 +1,535 @@
+{
+	"info": {
+		"_postman_id": "a15e2c6c-a281-4413-8b88-d05b81888946",
+		"name": "Space Launch API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Agencies",
+			"item": [
+				{
+					"name": "GET ALL",
+					"item": [
+						{
+							"name": "All Agencies",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Count is greater than or equal to zero \", function () {\r",
+											"    pm.expect(response.count).to.greaterThan(0);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Agencies to have a valid id, name and url\", function () {\r",
+											"    const pageOffset=10\r",
+											"    for(i=0;i<pageOffset;i++){\r",
+											"    pm.expect(response.results[i].id).not.null;\r",
+											"    pm.expect(response.results[i].url).not.null;\r",
+											"    pm.expect(response.results[i].name).not.null;\r",
+											"    }\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET BY MODE",
+					"item": [
+						{
+							"name": "All Agencies in Detailed mode",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?mode=detailed",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "mode",
+											"value": "detailed"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "All Agencies in Normal mode",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?mode=normal",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "mode",
+											"value": "normal"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET BY FILTERS",
+					"item": [
+						{
+							"name": "featured = true",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?featured=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "featured",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "featured = false",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?featured=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "featured",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "agencyType= Government",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?agency_type=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "agency_type",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "agencyType= Multinational",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?agency_type=2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "agency_type",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "agencyType= Commercial",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?agency_type=3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "agency_type",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "agencyType= Educational",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?agency_type=4",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "agency_type",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "agencyType= Private",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?agency_type=5",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "agency_type",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "agencyType= Unknown",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?agency_type=6",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "agency_type",
+											"value": "6"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "countryCode= USA",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?country_code=USA",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "country_code",
+											"value": "USA"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "countryCode= FRA",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?country_code=FRA",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "country_code",
+											"value": "FRA"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET BY SEARCH",
+					"item": []
+				},
+				{
+					"name": "GET BY ORDERING",
+					"item": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://spacelaunchnow.me/api/ll/2.2.0"
+		}
+	]
+}

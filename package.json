@@ -1,0 +1,19 @@
+{
+  "name": "suncorp-test",
+  "version": "1.0.0",
+  "description": "Postman API tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "newman run postman-collection/SpaceLaunchAPI.postman_collection.json --reporters=cli,htmlextra"
+  },
+  "keywords": [
+    "postman",
+    "api"
+  ],
+  "author": "Deepak Udayakumar",
+  "license": "ISC",
+  "dependencies": {
+    "newman": "^5.3.2",
+    "newman-reporter-htmlextra": "^1.22.8"
+  }
+}
