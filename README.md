@@ -13,7 +13,7 @@ This is a
 
 * Install Node on your dev local (if not installed already PLEASE CHECK THE VERSION - 8.10.0 minimum) - https://nodejs.org/en/
 * Clone the repo
-* Run `npm install` to add dependencies include testcafe, dotenv, etc
+* Run `npm install` to add depencies
 
 ### How to specify test Environment Variables ###
 
