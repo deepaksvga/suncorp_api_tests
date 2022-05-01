@@ -1,32 +1,24 @@
 # POSTMAN TESTS - SPACELAUNCH API #
 
-This is a 
+This assignment is setup as a node project to automate the api tests. 
+### Software Requirements ###
 
-* starting 
-
-### Requirements ###
-
-* NodeJS
-* npm
-
+* Node (https://nodejs.org/en/)
 ### How do I get set up? ###
 
-* Install Node on your dev local (if not installed already PLEASE CHECK THE VERSION - 8.10.0 minimum) - https://nodejs.org/en/
+* Install Node and NPM locally.
 * Clone the repo
-* Run `npm install` to add dependencies include testcafe, dotenv, etc
+* Run `npm install` to add dependencies
+### How to execute the tests? ###
 
-### How to specify test Environment Variables ###
+* Run `npm test`
+### How to view the Newman report generated? ###
 
-You 
+* The report will be generated after every execution under the folder - `newman`
+* Open the html report using any browser (chrome recommended)
+### How to import the collection in postman? ###
 
-* break
-
+* Download Postman tool for desktop.
+* Import collection under the project folder - `./postman-collection/SpaceLaunchAPI.postman_collection.json`
 ### Contributors ###
 * Deepak Udayakumar (deepak.svga@gmail.com)
-
-// To ADD
-
-Initial Setup
-How to Run
-Hoe to Access using Postman
-Viewing Report

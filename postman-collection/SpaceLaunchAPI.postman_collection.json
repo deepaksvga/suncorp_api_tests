@@ -20,15 +20,15 @@
 										"exec": [
 											"const response = pm.response.json();\r",
 											"\r",
-											"pm.test(\"Status code is 200\", function () {\r",
+											"pm.test(\"Verify the status code is 200\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
 											"});\r",
 											"\r",
-											"pm.test(\"Count is greater than or equal to zero \", function () {\r",
+											"pm.test(\"Verify the agencies count is greater than or equal to zero \", function () {\r",
 											"    pm.expect(response.count).to.greaterThan(0);\r",
 											"});\r",
 											"\r",
-											"pm.test(\"Agencies to have a valid id, name and url\", function () {\r",
+											"pm.test(\"Verify the agencies to have a valid id, name and url\", function () {\r",
 											"    const pageOffset=10\r",
 											"    for(i=0;i<pageOffset;i++){\r",
 											"    pm.expect(response.results[i].id).not.null;\r",
@@ -73,6 +73,16 @@
 										"exec": [
 											"pm.test(\"Status code is 200\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Your test name\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.next).contains(\"mode=detailed\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify the launch library url is present in detailed mode\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.results.launch_library_url).not.null;\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -110,6 +120,17 @@
 										"exec": [
 											"pm.test(\"Status code is 200\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Your test name\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.next).contains(\"mode=normal\");\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Verify the launch library url is not present in normal mode\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.results.launch_library_url).not.null;\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -150,8 +171,22 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
 											"pm.test(\"Status code is 200\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify the value of featured is true in all the results agency data\", function () {\r",
+											"    \r",
+											"    var counter;\r",
+											"    if (response.next){ counter = 10;}\r",
+											"    else { counter = response.count; }\r",
+											"    console.log(\"counter value is \"+counter)\r",
+											"\r",
+											"    for(i=0;i<counter;i++){\r",
+											"    pm.expect(response.results[i].featured).true;\r",
+											"    }\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -187,8 +222,21 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
 											"pm.test(\"Status code is 200\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify the value of featured is false in all the results agency data\", function () {\r",
+											"    var counter;\r",
+											"    if (response.next){ counter = 10;}\r",
+											"    else { counter = response.count; }\r",
+											"    console.log(\"counter value is \"+counter)\r",
+											"\r",
+											"    for(i=0;i<counter;i++){\r",
+											"    pm.expect(response.results[i].featured).false;\r",
+											"    }\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -224,8 +272,21 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
 											"pm.test(\"Status code is 200\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify the agency type is Government\", function () {\r",
+											"    var counter;\r",
+											"    if (response.next){ counter = 10;}\r",
+											"    else { counter = response.count; }\r",
+											"    console.log(\"counter value is \"+counter)\r",
+											"\r",
+											"    for(i=0;i<counter;i++){\r",
+											"    pm.expect(response.results[i].type).equals('Government');\r",
+											"    }\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -261,8 +322,21 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
 											"pm.test(\"Status code is 200\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify the agency type is Multinational\", function () {\r",
+											"    var counter;\r",
+											"    if (response.next){ counter = 10;}\r",
+											"    else { counter = response.count; }\r",
+											"    console.log(\"counter value is \"+counter)\r",
+											"\r",
+											"    for(i=0;i<counter;i++){\r",
+											"    pm.expect(response.results[i].type).equals('Multinational');\r",
+											"    }\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -298,8 +372,21 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
 											"pm.test(\"Status code is 200\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify the agency type is Commercial\", function () {\r",
+											"    var counter;\r",
+											"    if (response.next){ counter = 10;}\r",
+											"    else { counter = response.count; }\r",
+											"    console.log(\"counter value is \"+counter)\r",
+											"\r",
+											"    for(i=0;i<counter;i++){\r",
+											"    pm.expect(response.results[i].type).equals('Commercial');\r",
+											"    }\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -335,8 +422,21 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
 											"pm.test(\"Status code is 200\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify the agency type is Educational\", function () {\r",
+											"    var counter;\r",
+											"    if (response.next){ counter = 10;}\r",
+											"    else { counter = response.count; }\r",
+											"    console.log(\"counter value is \"+counter)\r",
+											"\r",
+											"    for(i=0;i<counter;i++){\r",
+											"    pm.expect(response.results[i].type).equals('Educational');\r",
+											"    }\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -372,8 +472,21 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
 											"pm.test(\"Status code is 200\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify the agency type is Private\", function () {\r",
+											"    var counter;\r",
+											"    if (response.next){ counter = 10;}\r",
+											"    else { counter = response.count; }\r",
+											"    console.log(\"counter value is \"+counter)\r",
+											"\r",
+											"    for(i=0;i<counter;i++){\r",
+											"    pm.expect(response.results[i].type).equals('Private');\r",
+											"    }\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -409,8 +522,21 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
 											"pm.test(\"Status code is 200\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify the agency type is UnKnown\", function () {\r",
+											"    var counter;\r",
+											"    if (response.next){ counter = 10;}\r",
+											"    else { counter = response.count; }\r",
+											"    console.log(\"counter value is \"+counter)\r",
+											"\r",
+											"    for(i=0;i<counter;i++){\r",
+											"    pm.expect(response.results[i].type).equals('Unknown');\r",
+											"    }\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -446,8 +572,21 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
 											"pm.test(\"Status code is 200\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify the country code is USA\", function () {\r",
+											"    var counter;\r",
+											"    if (response.next){ counter = 10;}\r",
+											"    else { counter = response.count; }\r",
+											"    console.log(\"counter value is \"+counter)\r",
+											"\r",
+											"    for(i=0;i<counter;i++){\r",
+											"    pm.expect(response.results[i].country_code).equals('USA');\r",
+											"    }\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -483,8 +622,21 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
 											"pm.test(\"Status code is 200\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify the Country code is France\", function () {\r",
+											"    var counter;\r",
+											"    if (response.next){ counter = 10;}\r",
+											"    else { counter = response.count; }\r",
+											"    console.log(\"counter value is \"+counter)\r",
+											"\r",
+											"    for(i=0;i<counter;i++){\r",
+											"    pm.expect(response.results[i].country_code).equals('FRA');\r",
+											"    }\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -512,24 +664,747 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "country_code= XYZ",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify the agencies count is equal to zero when country code is XYZ\", function () {\r",
+											"    pm.expect(response.count).to.equals(0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?country_code=XYZ",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "country_code",
+											"value": "XYZ"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "country_code= null",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify the agencies count is equal to zero when country code is null\", function () {\r",
+											"    pm.expect(response.count).to.equals(0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?country_code=null",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "country_code",
+											"value": "null"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "country_code=",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify the agencies count is not equal to zero when country code is empty\", function () {\r",
+											"    pm.expect(response.count).not.to.equals(0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?country_code=",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "country_code",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
 				{
 					"name": "GET BY SEARCH",
-					"item": []
+					"item": [
+						{
+							"name": "search = nasa",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(pm.collectionVariables.get(\"searchString\"));\r",
+											";\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?search = {{searchString}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "search ",
+											"value": " {{searchString}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "search =",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify the agencies count is greater than or equal to zero when the search string is empty\", function () {\r",
+											"    pm.expect(response.count).to.greaterThan(0);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?search = ",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "search ",
+											"value": " "
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "search = 45fsd@$^&",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?search = 45fsd@$^&",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "search ",
+											"value": " 45fsd@$^"
+										},
+										{
+											"key": "",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "search = null",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?search = null",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "search ",
+											"value": " null"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				},
 				{
 					"name": "GET BY ORDERING",
-					"item": []
+					"item": [
+						{
+							"name": "OrderBy Id (Ascending)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify the results are sorted by id in ascending order\", function () {\r",
+											"    var counter;\r",
+											"    if (response.next){ counter = 10;}\r",
+											"    else { counter = response.count; }\r",
+											"    console.log(\"counter value is \"+counter)\r",
+											"\r",
+											"var currentId = response.results[0].id;\r",
+											"\r",
+											"    console.log(\"currentId value is \"+currentId)\r",
+											"\r",
+											"var nextId ;\r",
+											"\r",
+											"    for(i=1;i<counter;i++){\r",
+											"        nextId = response.results[i].id;\r",
+											"        console.log(\"nextId value is \"+nextId)\r",
+											"        if (nextId>currentId){\r",
+											"            currentId = response.results[i].id\r",
+											"            console.log(\"currentId value is \"+currentId)\r",
+											"        }\r",
+											"        else{\r",
+											"            currentId = response.results[i].id\r",
+											"            throw new Error( \"The IDs are not sorted in ascending order\" );\r",
+											"        }\r",
+											"    }\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?ordering=id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "ordering",
+											"value": "id"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "OrderBy Id (Descending)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify the results are sorted by id in descending order\", function () {\r",
+											"    var counter;\r",
+											"    if (response.next){ counter = 10;}\r",
+											"    else { counter = response.count; }\r",
+											"    console.log(\"counter value is \"+counter)\r",
+											"\r",
+											"var currentId = response.results[0].id;\r",
+											"\r",
+											"    console.log(\"currentId value is \"+currentId)\r",
+											"\r",
+											"var nextId ;\r",
+											"\r",
+											"    for(i=1;i<counter;i++){\r",
+											"        nextId = response.results[i].id;\r",
+											"        console.log(\"nextId value is \"+nextId)\r",
+											"        if (nextId<currentId){\r",
+											"            currentId = response.results[i].id\r",
+											"            console.log(\"currentId value is \"+currentId)\r",
+											"        }\r",
+											"        else{\r",
+											"            currentId = response.results[i].id\r",
+											"            throw new Error( \"The IDs are not sorted in descending order\" );\r",
+											"        }\r",
+											"    }\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?ordering=-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "ordering",
+											"value": "-id"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "OrderBy Name (Ascending)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify the results are sorted by name in ascending order\", function () {\r",
+											"    var counter;\r",
+											"    if (response.next){ counter = 10;}\r",
+											"    else { counter = response.count; }\r",
+											"    console.log(\"counter value is \"+counter)\r",
+											"\r",
+											"    var currentName = response.results[0].name.normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g, \"\");\r",
+											"    console.log(\"currentName value is \"+currentName)\r",
+											"    \r",
+											"    var nextName ;\r",
+											"\r",
+											"    for(i=1;i<counter;i++){\r",
+											"        nextName = response.results[i].name.normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g, \"\");\r",
+											"        console.log(\"nextName value is \"+nextName)\r",
+											"        if (nextName>currentName){\r",
+											"            currentName = response.results[i].name.normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g, \"\")\r",
+											"            console.log(\"currentName value is \"+currentName)\r",
+											"        }\r",
+											"        else{\r",
+											"            currentName = response.results[i].name.normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g, \"\")\r",
+											"            console.log(\"currentName xxxxxxx value is \"+currentName)\r",
+											"            throw new Error( \"The names are not sorted in ascending order\" );\r",
+											"        }\r",
+											"    }\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?ordering=name",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "ordering",
+											"value": "name"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "OrderBy Name (Descending)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify the results are sorted by name in descending order\", function () {\r",
+											"    var counter;\r",
+											"    if (response.next){ counter = 10;}\r",
+											"    else { counter = response.count; }\r",
+											"    console.log(\"counter value is \"+counter)\r",
+											"\r",
+											"    var currentName = response.results[0].name.normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g, \"\");\r",
+											"    console.log(\"currentName value is \"+currentName)\r",
+											"    \r",
+											"    var nextName ;\r",
+											"\r",
+											"    for(i=1;i<counter;i++){\r",
+											"        nextName = response.results[i].name.normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g, \"\");\r",
+											"        console.log(\"nextName value is \"+nextName)\r",
+											"        if (nextName<currentName){\r",
+											"            currentName = response.results[i].name.normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g, \"\")\r",
+											"            console.log(\"currentName value is \"+currentName)\r",
+											"        }\r",
+											"        else{\r",
+											"            currentName = response.results[i].name.normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g, \"\")\r",
+											"            console.log(\"currentName xxxxxxx value is \"+currentName)\r",
+											"            throw new Error( \"The names are not sorted in descending order\" );\r",
+											"        }\r",
+											"    }\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?ordering=-name",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "ordering",
+											"value": "-name"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "OrderBy featured (Ascending)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify the results are sorted by feature flag in ascending order\", function () {\r",
+											"    var counter;\r",
+											"    if (response.next){ counter = 10;}\r",
+											"    else { counter = response.count; }\r",
+											"    console.log(\"counter value is \"+counter)\r",
+											"\r",
+											"    var currentFeaturedFlag = false\r",
+											"    console.log(\"currentFeaturedFlag value is \"+currentFeaturedFlag)\r",
+											"    \r",
+											"    var nextFeaturedFlag ;\r",
+											"\r",
+											"    for(i=1;i<counter;i++){\r",
+											"        nextFeaturedFlag = response.results[i].featured\r",
+											"        console.log(\"nextFeaturedFlag value is \"+nextFeaturedFlag)\r",
+											"        if (currentFeaturedFlag<=nextFeaturedFlag){\r",
+											"            currentFeaturedFlag = response.results[i].featured\r",
+											"            console.log(\"currentName value is \"+currentFeaturedFlag)\r",
+											"        }\r",
+											"        else{\r",
+											"            currentFeaturedFlag = response.results[i].featured\r",
+											"            console.log(\"currentName xxxxxxx value is \"+currentFeaturedFlag)\r",
+											"            throw new Error( \"The results-featured are not sorted in ascending order\" );\r",
+											"        }\r",
+											"    }\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?ordering=featured",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "ordering",
+											"value": "featured"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "OrderBy featured (Descending)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify the results are sorted by feature flag in ascending order\", function () {\r",
+											"    var counter;\r",
+											"    if (response.next){ counter = 10;}\r",
+											"    else { counter = response.count; }\r",
+											"    console.log(\"counter value is \"+counter)\r",
+											"\r",
+											"    var currentFeaturedFlag = true\r",
+											"    console.log(\"currentFeaturedFlag value is \"+currentFeaturedFlag)\r",
+											"    \r",
+											"    var nextFeaturedFlag ;\r",
+											"\r",
+											"    for(i=1;i<counter;i++){\r",
+											"        nextFeaturedFlag = response.results[i].featured\r",
+											"        console.log(\"nextFeaturedFlag value is \"+nextFeaturedFlag)\r",
+											"        if (currentFeaturedFlag>=nextFeaturedFlag){\r",
+											"            currentFeaturedFlag = response.results[i].featured\r",
+											"            console.log(\"currentName value is \"+currentFeaturedFlag)\r",
+											"        }\r",
+											"        else{\r",
+											"            currentFeaturedFlag = response.results[i].featured\r",
+											"            console.log(\"currentName xxxxxxx value is \"+currentFeaturedFlag)\r",
+											"            throw new Error( \"The results-featured are not sorted in desccending order\" );\r",
+											"        }\r",
+											"    }\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/agencies/?ordering=-featured",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"agencies",
+										""
+									],
+									"query": [
+										{
+											"key": "ordering",
+											"value": "-featured"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"variable": [
 		{
 			"key": "baseUrl",
 			"value": "https://spacelaunchnow.me/api/ll/2.2.0"
+		},
+		{
+			"key": "searchString",
+			"value": "nasa"
 		}
 	]
 }
